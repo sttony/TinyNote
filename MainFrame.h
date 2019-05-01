@@ -8,12 +8,11 @@
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
-
 #include <wx/wx.h>
-
 #endif
 
 #include <memory>
+#include <wx/treectrl.h>
 
 class MainFrame : public wxFrame {
 
@@ -29,10 +28,12 @@ private:
 
 wxDECLARE_EVENT_TABLE();
 
-    std::shared_ptr<wxMenu> m_menuFile;
-    std::shared_ptr<wxMenu> m_menuHelp;
-    std::shared_ptr<wxMenuBar> m_menuBar;
+    wxMenu *m_menuFile;
+    wxMenu *m_menuHelp;
+    wxMenuBar *m_menuBar;
+    wxTreeCtrl *m_navTree;
 
+    void createMenu();
 };
 
 enum {
