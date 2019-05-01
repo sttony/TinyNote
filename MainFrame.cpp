@@ -6,7 +6,7 @@
 
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-                EVT_MENU(ID_Hello, MainFrame::OnHello)
+                EVT_MENU(ID_Open_Notebook, MainFrame::OnOpenNotebook)
                 EVT_MENU(wxID_EXIT, MainFrame::OnExit)
                 EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
 wxEND_EVENT_TABLE()
@@ -52,8 +52,8 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
 void MainFrame::createMenu() {
     m_menuFile = new wxMenu;
-    m_menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
-                       "Help string shown in status bar for this menu item");
+    m_menuFile->Append(ID_Open_Notebook, "&Open...\tCtrl-O",
+                       "Open Notebook folder");
     m_menuFile->AppendSeparator();
     m_menuFile->Append(wxID_EXIT);
     m_menuHelp = new wxMenu;
@@ -73,6 +73,11 @@ void MainFrame::OnAbout(wxCommandEvent &event) {
                  "About Hello World", wxOK | wxICON_INFORMATION);
 }
 
-void MainFrame::OnHello(wxCommandEvent &event) {
-    wxLogMessage("Hello world from wxWidgets!");
+void MainFrame::OnOpenNotebook(wxCommandEvent &event) {
+    wxDirDialog dlg(NULL, "Choose input directory", "",
+                    wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+
+    if (dlg.ShowModal() == wxID_CANCEL)
+        return;
+    this->SetTitle(dlg.GetPath());
 }
