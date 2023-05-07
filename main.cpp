@@ -1,27 +1,34 @@
-// wxWidgets "Hello world" Program
-// For compilers that support precompilation, includes "wx/wx.h".
-#include <wx/wxprec.h>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QLabel>
 
-#ifndef WX_PRECOMP
+int main(int argc, char *argv[])
+{
+    // Create a Qt application
+    QApplication app(argc, argv);
 
-#include <wx/wx.h>
+    // Create a main window
+    QMainWindow mainWindow;
+    auto *centralWidget = new QWidget(&mainWindow);
+    mainWindow.setCentralWidget(centralWidget);
 
-#endif
+    // Create a horizontal layout
+    auto* layout = new QHBoxLayout;
 
-#include "MainFrame.h"
+    // Add some widgets to the layout
+    auto* button1 = new QPushButton("Button 1");
+    auto* label = new QLabel("Label");
+    auto* button2 = new QPushButton("Button 2");
+    layout->addWidget(button1);
+    layout->addWidget(label);
+    layout->addWidget(button2);
+    centralWidget->setLayout(layout);
 
-class TinyNodeApp : public wxApp {
-public:
-    bool OnInit() override;
-};
+    // Show the main window
+    mainWindow.show();
 
-
-wxIMPLEMENT_APP(TinyNodeApp);
-
-bool TinyNodeApp::OnInit() {
-    MainFrame *frame = new MainFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
-    frame->Show(true);
-    return true;
+    // Run the application event loop
+    return QApplication::exec();
 }
-
-
