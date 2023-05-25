@@ -55,14 +55,25 @@ void MainWindow::save() {
 }
 
 void MainWindow::createActions() {
-//    newAct = new QAction(tr("&New"), this);
-//    newAct->setShortcuts(QKeySequence::New);
-//    newAct->setStatusTip(tr("Create a new file"));
-//    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
+    newAct = new QAction(tr("&New"), this);
+    newAct->setShortcuts(QKeySequence::New);
+    newAct->setStatusTip(tr("Create a new file"));
+    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
+
+    openAct = new QAction(tr("&Open"), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    openAct->setStatusTip(tr("Open a existing file"));
+    connect(openAct, &QAction::triggered, this, &MainWindow::open);
 }
 
 void MainWindow::createMenus() {
-
+    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(newAct);
+    fileMenu->addAction(openAct);
+//    fileMenu->addAction(saveAct);
+//    fileMenu->addAction(printAct);
+   fileMenu->addSeparator();
+//    fileMenu->addAction(exitAct);
 }
 
 void MainWindow::undo() {

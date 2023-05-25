@@ -9,6 +9,8 @@
 #include <QMainWindow>
 #include <QActionGroup>
 #include <QLabel>
+#include <QMenu>
+#include <QMenuBar>
 
 class MainWindow   : public QMainWindow {
     Q_OBJECT
