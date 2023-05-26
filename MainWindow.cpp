@@ -4,7 +4,9 @@
 
 #include <QVBoxLayout>
 #include <QTreeWidgetItem>
+#include <QFileDialog>
 #include "MainWindow.h"
+#include "CNoteBook.h"
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event) {
     QMainWindow::contextMenuEvent(event);
@@ -47,7 +49,12 @@ void MainWindow::newFile() {
 }
 
 void MainWindow::open() {
+    QString filePath = QFileDialog::getOpenFileName(nullptr, "Open File", "", "All Files (*.*)");
+    // Check if a file was selected
+    if (filePath.isEmpty()) {
 
+    }
+    CNoteBook::Open(filePath.toStdString());
 }
 
 void MainWindow::save() {

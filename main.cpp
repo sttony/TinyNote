@@ -7,8 +7,7 @@
 #include <QtWidgets/QTreeView>
 #include <QtWidgets/QFileSystemModel>
 #include "MainWindow.h"
-
-
+#include "CNoteBook.h"
 
 int main(int argc, char *argv[])
 {
