@@ -47,11 +47,6 @@ int CNoteBook::Open(const std::string& root_folder) {
         string name = page.second.data();
         cout << name << endl;
     }
-
-    // fill nav bar.
-//    wxCommandEvent dummyEvent;
-//    g_frame->OnOpenNotebook(dummyEvent);
-
     s_currentNoteBook->StoreNoteBookPath(root_folder);
     return 0;
 }

@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
+#include <QTreeWidgetItem>
+#include "CNoteBook.h"
 
 class MainWindow   : public QMainWindow {
     Q_OBJECT
@@ -48,6 +50,8 @@ private slots:
 private:
     void createActions();
     void createMenus();
+    void updateOnNewNotebook();
+
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *formatMenu;
@@ -74,6 +78,10 @@ private:
     QAction *aboutAct;
     QAction *aboutQtAct;
     QLabel *infoLabel;
+
+    CNoteBook* m_NoteBook;
+
+    QTreeWidget* m_treeWidget;
 };
 
 

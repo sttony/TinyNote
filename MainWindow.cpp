@@ -3,7 +3,7 @@
 //
 
 #include <QVBoxLayout>
-#include <QTreeWidgetItem>
+
 #include <QFileDialog>
 #include "MainWindow.h"
 #include "CNoteBook.h"
@@ -21,16 +21,16 @@ MainWindow::MainWindow() {
     // Create a horizontal layout
     auto* layout = new QHBoxLayout;
 
-    auto* treeWidget = new QTreeWidget;
-    auto *item1 = new QTreeWidgetItem(treeWidget, QStringList("Item 1"));
-    auto *item2 = new QTreeWidgetItem(treeWidget, QStringList("Item 2"));
+    m_treeWidget = new QTreeWidget;
+    auto *item1 = new QTreeWidgetItem(m_treeWidget, QStringList("Item 1"));
+    auto *item2 = new QTreeWidgetItem(m_treeWidget, QStringList("Item 2"));
     auto *item3 = new QTreeWidgetItem(item2, QStringList("Item 3"));
-    treeWidget->setColumnCount(1);
-    treeWidget->setHeaderLabels(QStringList("Tree Widget"));
+    m_treeWidget->setColumnCount(1);
+    m_treeWidget->setHeaderLabels(QStringList("Tree Widget"));
 
     auto* label = new QLabel("Label");
 
-    layout->addWidget(treeWidget, 3);
+    layout->addWidget(m_treeWidget, 3);
     layout->addWidget(label, 7);
     centralWidget->setLayout(layout);
     createActions();
@@ -41,7 +41,7 @@ MainWindow::MainWindow() {
 
 //    setWindowTitle(tr("Menus"));
 //    setMinimumSize(160, 160);
-    resize(480, 320);
+    resize(800, 600);
 }
 
 void MainWindow::newFile() {
@@ -49,12 +49,13 @@ void MainWindow::newFile() {
 }
 
 void MainWindow::open() {
-    QString filePath = QFileDialog::getOpenFileName(nullptr, "Open File", "", "All Files (*.*)");
+    QString filePath = QFileDialog::getExistingDirectory(nullptr, "Open Directory", "");
     // Check if a file was selected
     if (filePath.isEmpty()) {
 
     }
     CNoteBook::Open(filePath.toStdString());
+    this->updateOnNewNotebook();
 }
 
 void MainWindow::save() {
@@ -145,4 +146,10 @@ void MainWindow::redo() {
 
 void MainWindow::cut() {
 
+}
+
+void MainWindow::updateOnNewNotebook() {
+    m_NoteBook = CNoteBook::getCurrentInstance();
+    this->setWindowTitle(m_NoteBook->GetFileName().c_str());
+    m_treeWidget->setHeaderLabels(QStringList(m_NoteBook->GetName().c_str()));
 }
